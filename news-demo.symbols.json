@@ -1,0 +1,486 @@
+{
+  "version": "1.7.0",
+  "type": "symbols",
+  "symbols": [
+    {
+      "name": "Reset",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "i",
+          "parameterType": "COUNTER"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "GET",
+            "url": "/rest/reset",
+            "data": "{}",
+            "cookies": {},
+            "headers": {},
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_goto",
+            "url": "/auth",
+            "credentials": {
+              "name": "",
+              "password": ""
+            }
+          },
+          "position": 2
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_waitForNode",
+            "waitCriterion": "CLICKABLE",
+            "node": {
+              "selector": "app-auth > div > div > div > ul > li:nth-child(1) > a",
+              "type": "CSS"
+            },
+            "maxWaitTime": 5
+          },
+          "position": 3
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setCounter",
+            "name": "i",
+            "value": "0",
+            "valueType": "NUMBER"
+          },
+          "position": 4
+        }
+      ]
+    },
+    {
+      "name": "Login Admin",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_fill",
+            "node": {
+              "selector": "login form input[type=\"text\"]",
+              "type": "CSS"
+            },
+            "value": "admin"
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_fill",
+            "node": {
+              "selector": "login form input[type=\"password\"]",
+              "type": "CSS"
+            },
+            "value": "admin"
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_submit",
+            "node": {
+              "selector": "login form",
+              "type": "CSS"
+            }
+          },
+          "position": 2
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_waitForNode",
+            "waitCriterion": "CLICKABLE",
+            "node": {
+              "selector": "create-news-auth form input",
+              "type": "CSS"
+            },
+            "maxWaitTime": 5
+          },
+          "position": 3
+        }
+      ]
+    },
+    {
+      "name": "Login User",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_fill",
+            "node": {
+              "selector": "login form input[type=\"text\"]",
+              "type": "CSS"
+            },
+            "value": "test"
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_fill",
+            "node": {
+              "selector": "login form input[type=\"password\"]",
+              "type": "CSS"
+            },
+            "value": "test"
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_submit",
+            "node": {
+              "selector": "login form",
+              "type": "CSS"
+            }
+          },
+          "position": 2
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_waitForNode",
+            "waitCriterion": "CLICKABLE",
+            "node": {
+              "selector": "create-news-auth form input",
+              "type": "CSS"
+            },
+            "maxWaitTime": 5
+          },
+          "position": 3
+        }
+      ]
+    },
+    {
+      "name": "Logout",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_clickElementByText",
+            "node": {
+              "selector": "body",
+              "type": "CSS"
+            },
+            "text": "Logout",
+            "tagName": "button"
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_waitForNode",
+            "waitCriterion": "CLICKABLE",
+            "node": {
+              "selector": "login form",
+              "type": "CSS"
+            },
+            "maxWaitTime": 5
+          },
+          "position": 1
+        }
+      ]
+    },
+    {
+      "name": "Read Newest",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [
+        {
+          "type": "input",
+          "name": "i",
+          "parameterType": "COUNTER",
+          "private": true
+        }
+      ],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_waitForNode",
+            "waitCriterion": "VISIBLE",
+            "node": {
+              "selector": "news-details",
+              "type": "CSS"
+            },
+            "maxWaitTime": 2
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_checkForNode",
+            "node": {
+              "selector": "news-details h5",
+              "type": "CSS"
+            }
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "incrementCounter",
+            "name": "i",
+            "incrementBy": -1
+          },
+          "position": 2
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_checkForText",
+            "value": "test{{#i}}",
+            "regexp": false,
+            "node": {
+              "selector": "news-details h5",
+              "type": "CSS"
+            }
+          },
+          "position": 3
+        }
+      ]
+    },
+    {
+      "name": "Create News",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [
+        {
+          "type": "input",
+          "name": "i",
+          "parameterType": "COUNTER",
+          "private": true
+        }
+      ],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "i",
+          "parameterType": "COUNTER"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_fill",
+            "node": {
+              "selector": "create-news-auth form > div:nth-child(1) > input",
+              "type": "CSS"
+            },
+            "value": "test{{#i}}"
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_submit",
+            "node": {
+              "selector": "create-news-auth form > div:nth-child(1) > input",
+              "type": "CSS"
+            }
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_waitForNode",
+            "waitCriterion": "VISIBLE",
+            "node": {
+              "selector": "news-list",
+              "type": "CSS"
+            },
+            "maxWaitTime": 5
+          },
+          "position": 2
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "web_executeScript",
+            "script": "var store = arguments[0];\nvar i = store.counters.i;\nreturn document.querySelectorAll('news-list .list-group-item').length === i + 1;",
+            "name": "check",
+            "async": false,
+            "timeout": 10
+          },
+          "position": 3
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "assertVariable",
+            "name": "check",
+            "value": "true",
+            "regexp": false
+          },
+          "position": 4
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "incrementCounter",
+            "name": "i",
+            "incrementBy": 1
+          },
+          "position": 5
+        }
+      ]
+    }
+  ]
+}

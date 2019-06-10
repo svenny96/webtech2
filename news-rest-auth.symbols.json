@@ -1,0 +1,570 @@
+{
+  "version": "1.7.0-SNAPSHOT",
+  "type": "symbols",
+  "symbols": [
+    {
+      "name": "Reset",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "basicAuthToken",
+          "parameterType": "STRING"
+        },
+        {
+          "type": "output",
+          "name": "jwt",
+          "parameterType": "STRING"
+        },
+        {
+          "type": "output",
+          "name": "sessionCookie",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "GET",
+            "url": "/rest/reset",
+            "data": "{}",
+            "cookies": {},
+            "headers": {},
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariable",
+            "name": "basicAuthToken",
+            "value": ""
+          },
+          "position": 2
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariable",
+            "name": "jwt",
+            "value": ""
+          },
+          "position": 3
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariable",
+            "name": "sessionCookie",
+            "value": ""
+          },
+          "position": 4
+        }
+      ]
+    },
+    {
+      "name": "Create News | Basic",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [
+        {
+          "type": "input",
+          "name": "basicAuthToken",
+          "parameterType": "STRING",
+          "private": true
+        }
+      ],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/rest/auth/basic/news",
+            "data": "{\"headline\": \"test\"}",
+            "cookies": {},
+            "headers": {
+              "Authorization": "Basic {{$basicAuthToken}}"
+            },
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        }
+      ]
+    },
+    {
+      "name": "Create News | JWT",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [
+        {
+          "type": "input",
+          "name": "jwt",
+          "parameterType": "STRING",
+          "private": true
+        }
+      ],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/rest/auth/jwt/news",
+            "data": "{\"headline\": \"test\"}",
+            "cookies": {},
+            "headers": {
+              "Authorization": "Bearer {{$jwt}}"
+            },
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        }
+      ]
+    },
+    {
+      "name": "Create News | Session",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [
+        {
+          "type": "input",
+          "name": "sessionCookie",
+          "parameterType": "STRING",
+          "private": true
+        }
+      ],
+      "outputs": [],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/rest/auth/session/news",
+            "data": "{\"headline\": \"test\"}",
+            "cookies": {},
+            "headers": {
+              "Cookie": "JSESSIONID={{$sessionCookie}}"
+            },
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        }
+      ]
+    },
+    {
+      "name": "Auth Admin | Basic",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "basicAuthToken",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariable",
+            "name": "basicAuthToken",
+            "value": "YWRtaW46YWRtaW4="
+          },
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "Auth User | Basic",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "basicAuthToken",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariable",
+            "name": "basicAuthToken",
+            "value": "dGVzdDp0ZXN0"
+          },
+          "position": 0
+        }
+      ]
+    },
+    {
+      "name": "Auth Admin | JWT",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "jwt",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/rest/jwt/authenticate",
+            "data": "{\"username\":\"admin\",\"password\":\"admin\"}",
+            "cookies": {},
+            "headers": {},
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariableByHttpResponse",
+            "name": "jwt"
+          },
+          "position": 2
+        }
+      ]
+    },
+    {
+      "name": "Auth User | JWT",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "jwt",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/rest/jwt/authenticate",
+            "data": "{\"username\":\"test\",\"password\":\"test\"}",
+            "cookies": {},
+            "headers": {},
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariableByHttpResponse",
+            "name": "jwt"
+          },
+          "position": 2
+        }
+      ]
+    },
+    {
+      "name": "Auth Admin | Session",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "sessionCookie",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/login.jsp",
+            "data": "username=admin&password=admin",
+            "cookies": {},
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariableByCookie",
+            "name": "sessionCookie",
+            "value": "JSESSIONID",
+            "cookieType": "REST"
+          },
+          "position": 2
+        }
+      ]
+    },
+    {
+      "name": "Auth User | Session",
+      "description": "",
+      "expectedResult": "",
+      "successOutput": null,
+      "inputs": [],
+      "outputs": [
+        {
+          "type": "output",
+          "name": "sessionCookie",
+          "parameterType": "STRING"
+        }
+      ],
+      "steps": [
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_call",
+            "method": "POST",
+            "url": "/login.jsp",
+            "data": "username=test&password=test",
+            "cookies": {},
+            "headers": {
+              "Content-Type": "application/x-www-form-urlencoded"
+            },
+            "credentials": {
+              "name": "",
+              "password": ""
+            },
+            "timeout": 0
+          },
+          "position": 0
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "rest_checkStatus",
+            "status": 200
+          },
+          "position": 1
+        },
+        {
+          "type": "action",
+          "disabled": false,
+          "ignoreFailure": false,
+          "negated": false,
+          "errorOutput": null,
+          "action": {
+            "type": "setVariableByCookie",
+            "name": "sessionCookie",
+            "value": "JSESSIONID",
+            "cookieType": "REST"
+          },
+          "position": 2
+        }
+      ]
+    }
+  ]
+}
