@@ -9,10 +9,12 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(DBNews.class)
 public abstract class DBNews_ extends de.ls5.wt2.DBIdentified_ {
 
+	public static volatile SingularAttribute<DBNews, String> author;
 	public static volatile SingularAttribute<DBNews, Date> publishedOn;
 	public static volatile SingularAttribute<DBNews, String> headline;
 	public static volatile SingularAttribute<DBNews, String> content;
 
+	public static final String AUTHOR = "author";
 	public static final String PUBLISHED_ON = "publishedOn";
 	public static final String HEADLINE = "headline";
 	public static final String CONTENT = "content";

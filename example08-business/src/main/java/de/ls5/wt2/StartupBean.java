@@ -27,6 +27,7 @@ public class StartupBean {
 
             news.setHeadline("Startup");
             news.setContent("Startup Bean successfully executed");
+            news.setAuthor("Hans Mueller");
             news.setPublishedOn(new Date());
 
             this.entityManager.persist(news);

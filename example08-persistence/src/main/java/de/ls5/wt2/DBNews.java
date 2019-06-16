@@ -13,6 +13,7 @@ public class DBNews extends DBIdentified {
     private Date publishedOn;
     private String headline;
     private String content;
+    private String author;
 
     @Temporal(TemporalType.TIMESTAMP)
     @JsonbDateFormat(value = JsonbDateFormat.TIME_IN_MILLIS)
@@ -39,5 +40,13 @@ public class DBNews extends DBIdentified {
     public void setContent(String content) {
         this.content = content;
     }
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 }
 

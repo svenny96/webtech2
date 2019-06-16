@@ -1,6 +1,5 @@
 de\ls5\wt2\conf\auth\WT2Realm.class
 de\ls5\wt2\rest\SimpleREST.class
-.gitignore
 de\ls5\wt2\conf\auth\LogoutFilterWithoutRedirect.class
 de\ls5\wt2\conf\rest\JAXRSActivator.class
 de\ls5\wt2\conf\auth\BasicAuthenticationFilterWithoutRedirect.class
