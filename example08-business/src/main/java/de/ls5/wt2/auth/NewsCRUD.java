@@ -95,6 +95,7 @@ public class NewsCRUD {
         news.setHeadline(param.getHeadline());
         news.setContent(param.getContent());
         news.setPublishedOn(new Date());
+        news.setAuthor(param.getAuthor());
 
         this.entityManager.persist(news);
 
