@@ -46,4 +46,7 @@ export class SessionAuthService extends AuthService {
   get isLoggedIn(): boolean {
     return this.loggedIn;
   }
+  getUsername(): string {
+	  return 'hallo';
+  }
 }

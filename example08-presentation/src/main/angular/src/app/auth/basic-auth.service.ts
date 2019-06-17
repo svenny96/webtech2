@@ -42,4 +42,7 @@ export class BasicAuthService extends AuthService {
   get isLoggedIn(): boolean {
     return this.token != null;
   }
+  getUsername(): string {
+	  return atob(this.token).split(':')[0];
+  } 
 }

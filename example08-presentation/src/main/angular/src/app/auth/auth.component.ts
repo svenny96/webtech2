@@ -65,4 +65,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn;
   }
+  get currentUser(): string {
+	  return this.authService.getUsername();
+  }
 }
