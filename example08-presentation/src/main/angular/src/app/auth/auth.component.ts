@@ -17,6 +17,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
 
   private authService: AuthService;
 
+
   constructor(private http: HttpClient,
               private authNewsService: AuthNewsService) {
     super(authNewsService);
@@ -30,6 +31,17 @@ export class AuthComponent extends AngularComponent implements OnInit {
     this.authService.logout().subscribe();
     this.news = [];
     this.latest = null;
+  }
+
+  loadByAuthor(author: string): void {
+    this.newsService.getNewest().subscribe(
+      news => this.latest = news,
+      console.error
+    );
+    this.newsService.getAllByAuthor(author).subscribe(
+      news => this.news = news,
+      console.error
+    );
   }
 
   useBasicAuth(e?: Event) {
@@ -68,4 +80,6 @@ export class AuthComponent extends AngularComponent implements OnInit {
   get currentUser(): string {
 	  return this.authService.getUsername();
   }
+
+ 
 }

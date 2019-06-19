@@ -40,7 +40,7 @@
       <hr>
       <h4 class="title">All News</h4>
       <hr>
-      <news-list [news]="news"></news-list>
+      <news-list (filteredName)="loadByAuthor($event)" [news]="news"></news-list>
     </div>
   </div>
 </div>

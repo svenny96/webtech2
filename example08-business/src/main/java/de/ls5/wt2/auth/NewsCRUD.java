@@ -80,6 +80,28 @@ public class NewsCRUD {
         final List result = this.entityManager.createQuery(query).getResultList();
         return Response.ok(result).build();
     }
+    
+    @POST
+    @Path("byAuthor")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readNewsByAuthor(final DBNews param) {
+    	 final Subject subject = SecurityUtils.getSubject();
+         if (subject == null || !subject.isAuthenticated()) {
+             return Response.status(Response.Status.UNAUTHORIZED).build();
+         }
+    	
+    	 final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+         final CriteriaQuery<DBNews> query = builder.createQuery(DBNews.class);
+
+         final Root<DBNews> from = query.from(DBNews.class);
+         
+         query.where(builder.equal(from.get(DBNews_.author), param.getAuthor()));
+         
+         query.select(from);
+         final List result = this.entityManager.createQuery(query).getResultList();
+         return Response.ok(result).build();
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

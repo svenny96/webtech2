@@ -19,6 +19,12 @@ export class SecurityNewsService extends BaseNewsService {
     );
   }
 
+  getAllByAuthor(author: string): Observable<News[]> {
+    return this.http.get<any[]>(`${env.apiUrl}/security/news`, {headers: this.defaultHeaders}).pipe(
+      map(body => body.map(n => News.fromObject(n)))
+    );
+  }
+
   getNewest(): Observable<News> {
     return this.http.get<any>(`${env.apiUrl}/security/news/newest`, {headers: this.defaultHeaders}).pipe(
       map(body => News.fromObject(body))

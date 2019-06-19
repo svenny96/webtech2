@@ -23,6 +23,12 @@ export class AuthNewsService extends BaseNewsService {
     );
   }
 
+  getAllByAuthor(author: string): Observable<News[]> {
+    return this.http.post<any[]>(`${this._authService.getBaseUrl()}/news/byAuthor`, {author}, {headers: this._authService.getAuthHeaders()}).pipe(
+      map(body => body.map(n => News.fromObject(n)))
+    );
+  }
+
   getNewest(): Observable<News> {
     return this.http.get<any>(`${this._authService.getBaseUrl()}/news/newest`, {headers: this._authService.getAuthHeaders()}).pipe(
       map(body => News.fromObject(body))

@@ -18,6 +18,11 @@ export class NewsService extends BaseNewsService {
       map(body => body.map(n => News.fromObject(n)))
     );
   }
+  getAllByAuthor(author: string): Observable<News[]> {
+	  return this.http.get<any[]>(`${env.apiUrl}/news`, {headers: this.defaultHeaders}).pipe(
+      map(body => body.map(n => News.fromObject(n)))
+    );
+  }
 
   getNewest(): Observable<News> {
     return this.http.get<any>(`${env.apiUrl}/news/newest`, {headers: this.defaultHeaders}).pipe(
