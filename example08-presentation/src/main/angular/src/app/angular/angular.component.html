@@ -14,3 +14,30 @@
     <news-list [news]="news"></news-list>
   </div>
 </div>
+<div class="container">
+  <ngb-tabset>
+    <ngb-tab title="Bacon">
+        <ng-template ngbTabContent>
+          <p class="mt-4">Content for tab 1.
+            <button type="button"
+                    class="btn btn-secondary"
+                    placement="bottom"
+                    ngbPopover="A popover in tab 1"
+                    popoverTitle="Bacon is good">
+              Click me
+            </button>
+          </p>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Lettuce">
+        <ng-template ngbTabContent>
+          <p>Content for tab 2</p>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Tomatoes">
+        <ng-template ngbTabContent>
+          <p>Content for tab 3</p>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+</div>
