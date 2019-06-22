@@ -12,6 +12,8 @@ export abstract class BaseNewsService {
 
   abstract getNewest(): Observable<News>;
 
+  abstract getNewestByAuthor(author: string): Observable<News>;
+
   abstract getAll(): Observable<News[]>;
 
   abstract getAllByAuthor(author: string): Observable<News[]>;

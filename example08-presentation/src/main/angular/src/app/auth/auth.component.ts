@@ -7,6 +7,7 @@ import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
 import { SessionAuthService } from './session-auth.service';
 
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -21,10 +22,13 @@ export class AuthComponent extends AngularComponent implements OnInit {
   constructor(private http: HttpClient,
               private authNewsService: AuthNewsService) {
     super(authNewsService);
-    this.useBasicAuth();
+   
   }
 
   ngOnInit() {
+	  this.authService = new BasicAuthService(this.http);
+	this.authNewsService.authService = this.authService;
+	
   }
 
   logout() {

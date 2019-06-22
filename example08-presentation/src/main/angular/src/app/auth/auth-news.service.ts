@@ -6,6 +6,7 @@ import { News } from '../news';
 import { map } from 'rxjs/operators';
 import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
+import { environment as env } from '../../environments/environment';
 
 @Injectable()
 export class AuthNewsService extends BaseNewsService {
@@ -31,6 +32,18 @@ export class AuthNewsService extends BaseNewsService {
 
   getNewest(): Observable<News> {
     return this.http.get<any>(`${this._authService.getBaseUrl()}/news/newest`, {headers: this._authService.getAuthHeaders()}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
+
+  getNewestByAuthor(author: string): Observable<News> {
+	  return this.http.get<any>(`${this._authService.getBaseUrl()}/news/newest`, {headers: this._authService.getAuthHeaders()}).pipe(
+      map(body => News.fromObject(body))
+    );
+  }
+
+  getNewestBase(): Observable<News> {
+    return this.http.get<any>(`${env.apiUrl}/news/newest`, {headers: this.defaultHeaders}).pipe(
       map(body => News.fromObject(body))
     );
   }

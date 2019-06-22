@@ -19,6 +19,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
+
 import de.ls5.wt2.DBNews;
 import de.ls5.wt2.DBNews_;
 
@@ -40,6 +43,23 @@ public class NewsCRUD {
 
         final Order order = builder.desc(from.get(DBNews_.publishedOn));
 
+        query.select(from).orderBy(order);
+
+        return Response.ok(this.entityManager.createQuery(query).setMaxResults(1).getSingleResult()).build();
+    }
+    
+    @POST
+    @Path("/newest/byAuthor")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readNewestNewsByAuthor(final DBNews param) {
+    	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+        final CriteriaQuery<DBNews> query = builder.createQuery(DBNews.class);
+
+        final Root<DBNews> from = query.from(DBNews.class);
+
+        final Order order = builder.desc(from.get(DBNews_.publishedOn));
+        
+        query.where(builder.equal(from.get(DBNews_.author), param.getAuthor()));
         query.select(from).orderBy(order);
 
         return Response.ok(this.entityManager.createQuery(query).setMaxResults(1).getSingleResult()).build();
@@ -72,6 +92,23 @@ public class NewsCRUD {
         query.select(from);
 
         return this.entityManager.createQuery(query).getResultList();
+    }
+    
+    @POST
+    @Path("byAuthor")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readNewsByAuthor(final DBNews param) {
+    	 final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+         final CriteriaQuery<DBNews> query = builder.createQuery(DBNews.class);
+
+         final Root<DBNews> from = query.from(DBNews.class);
+         
+         query.where(builder.equal(from.get(DBNews_.author), param.getAuthor()));
+         
+         query.select(from);
+         final List result = this.entityManager.createQuery(query).getResultList();
+         return Response.ok(result).build();
     }
 
     @Path("/{id}")

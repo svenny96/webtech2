@@ -1,28 +1,32 @@
 <div class="container">
-  <ngb-tabset>
-    <ngb-tab title="Start">
-        <ng-template ngbTabContent>
-			<div *ngIf="!isLoggedIn">
+  
+	 <div *ngIf="!isLoggedIn">
 			<h4 class="title">Login</h4>
 			<hr>
 			<div class="card">
 				<div class="card-body">
-				<ul class="nav nav-pills nav-fill">
-					<li class="nav-item">
-					<a class="nav-link" href="#" (click)="useBasicAuth($event)" [class.active]="isBasicAuth()">Basic</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link" href="#" (click)="useSessionAuth($event)" [class.active]="isSessionAuth()">Session</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link" href="#" (click)="useJwtAuth($event)" [class.active]="isJwtAuth()">JWT</a>
-					</li>
-				</ul>
+				
 				<hr>
 				<login [authService]="authService" (loggedIn)="load()"></login>
 				</div>
 			</div>
 			</div>
+	<div *ngIf="isLoggedIn">
+	<ngb-tabset>
+    <ngb-tab title="Start">
+        <ng-template ngbTabContent>
+			
+        </ng-template>
+      </ngb-tab>
+	  
+	  <ngb-tab title="Meine Nachrichten">
+        <ng-template ngbTabContent>
+          <p>Content for tab 2</p>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Login/Registrierung">
+        <ng-template ngbTabContent>
+        
 
 			<div *ngIf="isLoggedIn">
 			<div class="row">
@@ -50,18 +54,7 @@
 			</div>
         </ng-template>
       </ngb-tab>
-	  
-	  <ngb-tab title="Meine Nachrichten">
-        <ng-template ngbTabContent>
-          <p>Content for tab 2</p>
-        </ng-template>
-      </ngb-tab>
-      <ngb-tab title="Login/Registrierung">
-        <ng-template ngbTabContent>
-          <p>Content for tab 3</p>
-        </ng-template>
-      </ngb-tab>
     </ngb-tabset>
 </div>
-		  
+</div>		  
 			
