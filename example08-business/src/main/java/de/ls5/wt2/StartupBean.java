@@ -32,6 +32,12 @@ public class StartupBean {
 
             this.entityManager.persist(news);
         }
+        final DBUser user = new DBUser();
+        
+        user.setName("admin");
+        user.setPassword("admin");
+        
+        this.entityManager.persist(user);
     }
 
     @PreDestroy
