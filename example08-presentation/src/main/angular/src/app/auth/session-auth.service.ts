@@ -35,6 +35,15 @@ export class SessionAuthService extends AuthService {
     );
   }
 
+   register(username: string, password: string): Observable<boolean> {
+	   return this.http.post<any[]>(`${env.apiUrl}/news/newAuthor`, { username, password }, {headers:new HttpHeaders({ 'Content-Type': 'application/json'
+  })})
+	   .pipe(map(body => {
+		   return true;
+	   }
+    ));
+  }
+
   getAuthHeaders(): HttpHeaders {
     return new HttpHeaders();
   }

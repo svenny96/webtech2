@@ -10,6 +10,8 @@ export abstract class AuthService {
 
   abstract logout(): Observable<boolean>;
 
+  abstract register(username: string, password: string): Observable<boolean>;
+
   abstract getAuthHeaders(): HttpHeaders;
 
   abstract getBaseUrl(): string;

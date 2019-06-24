@@ -24,6 +24,8 @@ import org.apache.shiro.subject.Subject;
 
 import de.ls5.wt2.DBNews;
 import de.ls5.wt2.DBNews_;
+import de.ls5.wt2.DBUser;
+import de.ls5.wt2.DBUser_;
 
 @Path("/news")
 @Transactional
@@ -64,7 +66,37 @@ public class NewsCRUD {
 
         return Response.ok(this.entityManager.createQuery(query).setMaxResults(1).getSingleResult()).build();
     }
-
+    
+    @POST
+    @Path("/newAuthor")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createNewAuthor(final DBUser param) {
+    	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+    	final CriteriaQuery<DBUser> query = builder.createQuery(DBUser.class);
+    	
+    	final Root<DBUser> from = query.from(DBUser.class);
+    	
+    	query.where(builder.equal(from.get(DBUser_.name), param.getName()));
+    	query.select(from);
+    	
+    	final List result = this.entityManager.createQuery(query).getResultList();
+    	if(result.size() > 0)
+    	{
+    		return Response.status(Response.Status.UNAUTHORIZED).build();
+    	}
+    	
+    	final DBUser user = new DBUser();
+    	user.setName(param.getName());
+    	user.setPassword(param.getPassword());
+    	
+    	this.entityManager.persist(user);
+    	
+    	return Response.ok(user).build();
+    }
+    
+   
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

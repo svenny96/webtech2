@@ -9,6 +9,8 @@ import { environment as env } from '../../environments/environment';
 export class BasicAuthService extends AuthService {
 
   private token: string;
+  private newname: string;
+ 
 
   login(username: string, password: string): Observable<boolean> {
     var token = btoa(unescape(encodeURIComponent(username + ':' + password)));
@@ -18,6 +20,16 @@ export class BasicAuthService extends AuthService {
           this.token = token;
           return true;
         }));
+  }
+
+  register(name: string, password: string): Observable<boolean> {
+	   return this.http.post<any[]>(`${env.apiUrl}/news/newAuthor`, { name, password }, {headers:new HttpHeaders({ 'Content-Type': 'application/json'
+  })})
+	   .pipe(map(body => {
+			this.newname = name;
+		   return true;
+	   }
+    ));
   }
 
   logout(): Observable<boolean> {

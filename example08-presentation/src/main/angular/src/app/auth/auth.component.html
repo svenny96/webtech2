@@ -9,6 +9,8 @@
 				<hr>
 				<login [authService]="authService" (loggedIn)="load()"></login>
 				</div>
+				<hr>
+				<register [authService]="authService"></register>
 			</div>
 			</div>
 	<div *ngIf="isLoggedIn">
