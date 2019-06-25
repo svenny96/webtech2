@@ -13,9 +13,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 export class AngularComponent implements OnInit {
 
 
-  public filtered: boolean;	
+  public filtered: boolean;
   public latest: News;
+  public latestOwned: News;
   public news: News[] = [];
+  public newsOwned: News[] = [];
 
   constructor(protected newsService: NewsService) {
   }
@@ -29,7 +31,7 @@ export class AngularComponent implements OnInit {
     this.newsService.getNewest().subscribe(
       news => this.latest = news,
       console.error
-    );
+	);
     this.newsService.getAll().subscribe(
       news => this.news = news,
       console.error

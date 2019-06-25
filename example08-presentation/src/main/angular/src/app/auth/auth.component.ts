@@ -37,6 +37,26 @@ export class AuthComponent extends AngularComponent implements OnInit {
     this.latest = null;
   }
 
+  load(): void {
+    this.newsService.getNewest().subscribe(
+      news => this.latest = news,
+      console.error
+	);
+	this.newsService.getNewestByAuthor(this.currentUser).subscribe(
+		news => this.latestOwned = news,
+		console.error
+	);
+    this.newsService.getAll().subscribe(
+      news => this.news = news,
+      console.error
+	);
+	this.newsService.getAllByAuthor(this.currentUser).subscribe(
+		news => this.newsOwned = news,
+		console.error
+	);
+    this.filtered = false;
+  }
+
   loadByAuthor(author: string): void {
     this.newsService.getNewest().subscribe(
       news => this.latest = news,
@@ -45,7 +65,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
     this.newsService.getAllByAuthor(author).subscribe(
       news => this.news = news,
       console.error
-    );
+	);
   }
 
   useBasicAuth(e?: Event) {

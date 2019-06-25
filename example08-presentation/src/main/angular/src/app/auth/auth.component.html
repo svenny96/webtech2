@@ -17,13 +17,21 @@
 	<ngb-tabset>
     <ngb-tab title="Start">
         <ng-template ngbTabContent>
-			
+        			
         </ng-template>
       </ngb-tab>
 	  
 	  <ngb-tab title="Meine Nachrichten">
         <ng-template ngbTabContent>
-          <p>Content for tab 2</p>
+          <div class="col-8">
+				<h4 class="title">Meine Nachrichten</h4>
+				<hr>
+				<news-details [news]="latestOwned"></news-details>
+				<hr>
+				<h4 class="title">Meine Nachrichten</h4>
+				<hr>
+				<news-list [news]="newsOwned"></news-list>
+			</div>
         </ng-template>
       </ngb-tab>
       <ngb-tab title="Login/Registrierung">
