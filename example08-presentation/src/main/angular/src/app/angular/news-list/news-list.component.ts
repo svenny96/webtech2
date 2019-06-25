@@ -13,12 +13,16 @@ export class NewsListComponent {
   public news: News[] = [];
 
   @Output()
-  filteredName = new EventEmitter<string>();
+  filteredName = new EventEmitter<string>();	
 
   get reversedNews(): News[] {
-    return this.news.slice().reverse();
+	return this.news.slice().reverse();
   }
 
+  edit(news: News): void {
+	  news.editable = !news.editable;
+  }
+  
   onFilterByName(name: string) {
     this.filteredName.emit(name);
   }

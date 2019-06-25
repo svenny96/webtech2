@@ -40,11 +40,11 @@ public class WT2Realm extends AuthorizingRealm implements Realm {
 
             @Override
             public Collection<String> getRoles() {
-                if ("admin".equals(principals.getPrimaryPrincipal())) {
+                
                     return Collections.singleton("admin");
-                }
+                
 
-                return Collections.emptyList();
+              
             }
 
             @Override
