@@ -19,4 +19,6 @@ export abstract class BaseNewsService {
   abstract getAllByAuthor(author: string): Observable<News[]>;
 
   abstract create(headline: string, content: string): Observable<News>;
+
+  abstract change(author: string, headline: string, content: string): Observable<News[]>;
 }

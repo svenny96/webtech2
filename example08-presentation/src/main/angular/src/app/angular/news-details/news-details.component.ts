@@ -2,10 +2,12 @@ import { Component, Input } from '@angular/core';
 import { News } from '../../news';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
+
 @Component({
   selector: 'news-details',
   templateUrl: './news-details.component.html',
   styleUrls: ['./news-details.component.sass']
+ 
 })
 export class NewsDetailsComponent {
 

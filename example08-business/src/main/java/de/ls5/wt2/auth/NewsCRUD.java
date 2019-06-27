@@ -105,6 +105,23 @@ public class NewsCRUD {
     }
     
     @POST
+    @Path("/newest/byAuthor")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response readNewestNewsByAuthor(final DBNews param) {
+    	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+        final CriteriaQuery<DBNews> query = builder.createQuery(DBNews.class);
+
+        final Root<DBNews> from = query.from(DBNews.class);
+
+        final Order order = builder.desc(from.get(DBNews_.publishedOn));
+        
+        query.where(builder.equal(from.get(DBNews_.author), param.getAuthor()));
+        query.select(from).orderBy(order);
+
+        return Response.ok(this.entityManager.createQuery(query).setMaxResults(1).getSingleResult()).build();
+    }
+    
+    @POST
     @Path("deleteNews")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

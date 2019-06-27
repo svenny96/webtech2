@@ -6,7 +6,7 @@ import { JwtAuthService } from './jwt-auth.service';
 import { BasicAuthService } from './basic-auth.service';
 import { AuthService } from './auth.service';
 import { SessionAuthService } from './session-auth.service';
-
+import { News } from '../news';
 
 @Component({
   selector: 'app-auth',
@@ -66,6 +66,20 @@ export class AuthComponent extends AngularComponent implements OnInit {
       news => this.news = news,
       console.error
 	);
+	this.filtered = true;
+  }
+
+  changeNews(newsC: News): void {
+	this.newsService.change(newsC.author, newsC.headline, newsC.content).subscribe(
+		news =>{ this.news = news;
+		this.newsOwned = this.ownedNewsFromNews;
+		this.latest = this.latestFromNews;
+		this.latestOwned = this.latestOwnedFromNews	
+		},
+		console.error
+	);
+	
+	this.load();
   }
 
   useBasicAuth(e?: Event) {
@@ -105,5 +119,37 @@ export class AuthComponent extends AngularComponent implements OnInit {
 	  return this.authService.getUsername();
   }
 
+ get ownedNewsFromNews(): News[] {
+	 let newsList: News[] = Object.assign([], this.news);
+
+	//if(this.currentUser === "admin") {
+	//		return newsList;
+	//}
+
+	  for(let el of newsList) {
+		  if(el.author === this.currentUser) {
+
+		  } else {
+			  newsList.splice(newsList.indexOf(el),1);
+		  }
+	  }
+	 return newsList;
+  }
+
+  get latestFromNews(): News {
+	  let newsList: News[] = Object.assign([], this.news);
+	  return newsList.pop();
+  }
+
+  get latestOwnedFromNews(): News {
+	  let newsList: News[] = Object.assign([], this.news);
+	  newsList = newsList.slice().reverse();
+
+	  for(let el of newsList) {
+		  if(el.author === this.currentUser) {
+			  return el;
+		  }
+	  }
+  }
  
 }

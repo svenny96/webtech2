@@ -40,4 +40,10 @@ export class NewsService extends BaseNewsService {
       map(body => News.fromObject(body))
     );
   }
+ change(author: string, headline: string, content: string): Observable<News[]> {
+    return this.http.get<any[]>(`${env.apiUrl}/news`, {headers: this.defaultHeaders}).pipe(
+      map(body => body.map(n => News.fromObject(n)))
+    );
+  }
+  
 }

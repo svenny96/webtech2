@@ -37,7 +37,7 @@ export class AuthNewsService extends BaseNewsService {
   }
 
   getNewestByAuthor(author: string): Observable<News> {
-	  return this.http.get<any>(`${this._authService.getBaseUrl()}/news/newest`, {headers: this._authService.getAuthHeaders()}).pipe(
+	  return this.http.post<any>(`${this._authService.getBaseUrl()}/news/newest/byAuthor`, {author}, {headers: this._authService.getAuthHeaders()}).pipe(
       map(body => News.fromObject(body))
     );
   }
@@ -52,6 +52,12 @@ export class AuthNewsService extends BaseNewsService {
     let author: string = this._authService.getUsername();
     return this.http.post<any>(`${this._authService.getBaseUrl()}/news`, {headline, content, author}, {headers: this._authService.getAuthHeaders()}).pipe(
       map(body => News.fromObject(body))
+    );
+  }
+
+  change(author: string, headline: string, content: string): Observable<News[]> {
+    return this.http.post<any>(`${this._authService.getBaseUrl()}/news/changeNews`, {headline, content, author}, {headers: this._authService.getAuthHeaders()}).pipe(
+       map(body => body.map(n => News.fromObject(n)))
     );
   }
 
