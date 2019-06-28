@@ -10,10 +10,10 @@
       <small>{{n.publishedOn | date:mediumDate}}</small>
 	</div>
 	<div *ngIf="n.editable">
-		<p class="mb-1">{{n.content}}</p>
+		<p class="ml-3">{{n.content}}</p>
 	</div>
-	<div *ngIf="n.editable && n.author === user">
-		<p class="mb-1"><button (click)="openEditDialog(n)">Bearbeiten</button></p>
+	<div *ngIf="n.editable && (n.author === user || user === 'admin')">
+		<p class="mb-1"><button class="btn btn-secondary mr-1 ml-2" (click)="openEditDialog(n)">Bearbeiten</button><button class="btn btn-secondary mr-1" (click)="onDelete(n)" >Loeschen</button></p>
 	</div>
 	</div>
 

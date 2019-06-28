@@ -1,24 +1,31 @@
 <div class="container">
   
 	 <div *ngIf="!isLoggedIn">
-			<h4 class="title">Login</h4>
+		 <div class="row justify-content-center">
+		 <div class="col-8">
+			<h4 class="title">Login / Registrierung</h4>
 			<hr>
 			<div class="card">
 				<div class="card-body">
-				
+				Ich habe bereits einen Account:	
 				<hr>
 				<login [authService]="authService" (loggedIn)="load()"></login>
-				</div>
+				<hr>
+				Ich habe noch keinen Account:
 				<hr>
 				<register [authService]="authService"></register>
+				</div>
 			</div>
-			</div>
+		</div>
+	</div>
+	</div>
 	<div *ngIf="isLoggedIn">
 	<ngb-tabset>
     
 	  
 	  <ngb-tab title="Meine Nachrichten">
         <ng-template ngbTabContent>
+		<div class="row justify-content-center">
           <div class="col-8">
 				<h4 class="title">Meine Nachrichten</h4>
 				<hr>
@@ -26,24 +33,26 @@
 				<hr>
 				<h4 class="title">Meine Nachrichten</h4>
 				<hr>
-				<news-list [news]="newsOwned" (changedNews)="changeNews($event)" [user]="currentUser"></news-list>
+				<news-list [news]="newsOwned" (deletedNews)="deleteNews($event)" (changedNews)="changeNews($event)" [user]="currentUser"></news-list>
 			</div>
+		</div>	
         </ng-template>
       </ngb-tab>
-      <ngb-tab title="Login/Registrierung">
+      <ngb-tab title="Alle Nachrichten/ Verfassen">
         <ng-template ngbTabContent>
         
 
 			<div *ngIf="isLoggedIn">
 			<div class="row">
-				<div class="col-6 text-right">
-				<button class="btn btn-sm btn-outline-secondary" (click)="logout()">Logout {{currentUser}}</button>
-				</div>
-				<div class="col-6 text-left">
+				<div class="col-12 text-right">
 					<div *ngIf="filtered">
-						<button class="btn btn-link" (click)="load()">Alle Nachrichten anzeigen</button>
-					</div>		
+						<button class="btn btn-light mr-1" (click)="load()">Alle Nachrichten anzeigen</button>
+					</div>
+					<button class="btn btn-light" (click)="logout()">Logout {{currentUser}}</button>	
 				</div>
+				
+				
+		
 			</div>
 			<hr>
 			<div class="row">

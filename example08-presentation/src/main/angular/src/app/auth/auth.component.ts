@@ -41,19 +41,33 @@ export class AuthComponent extends AngularComponent implements OnInit {
     this.newsService.getNewest().subscribe(
       news => this.latest = news,
       console.error
-	);
-	this.newsService.getNewestByAuthor(this.currentUser).subscribe(
-		news => this.latestOwned = news,
-		console.error
-	);
-    this.newsService.getAll().subscribe(
+		);
+
+	 this.newsService.getAll().subscribe(
       news => this.news = news,
       console.error
-	);
-	this.newsService.getAllByAuthor(this.currentUser).subscribe(
+		);
+
+	if(this.currentUser === "admin") {
+		this.newsService.getNewest().subscribe(
+		news => this.latestOwned = news,
+		console.error
+		);
+		this.newsService.getAll().subscribe(
 		news => this.newsOwned = news,
 		console.error
-	);
+		);
+	} else {
+		this.newsService.getNewestByAuthor(this.currentUser).subscribe(
+		news => this.latestOwned = news,
+		console.error
+		);
+		this.newsService.getAllByAuthor(this.currentUser).subscribe(
+		news => this.newsOwned = news,
+		console.error
+		);
+	}
+	
     this.filtered = false;
   }
 
@@ -80,6 +94,17 @@ export class AuthComponent extends AngularComponent implements OnInit {
 	);
 	
 	this.load();
+  }
+
+  deleteNews(newsD: News): void {
+	this.newsService.delete(newsD.author, newsD.headline, newsD.content).subscribe(
+		news =>{ this.news = news;
+		this.newsOwned = this.ownedNewsFromNews;
+		this.latest = this.latestFromNews;
+		this.latestOwned = this.latestOwnedFromNews	
+		},
+		console.error
+	);
   }
 
   useBasicAuth(e?: Event) {
@@ -127,7 +152,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
 	//}
 
 	  for(let el of newsList) {
-		  if(el.author === this.currentUser) {
+		  if(el.author === this.currentUser || this.currentUser === "admin") {
 
 		  } else {
 			  newsList.splice(newsList.indexOf(el),1);
@@ -146,7 +171,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
 	  newsList = newsList.slice().reverse();
 
 	  for(let el of newsList) {
-		  if(el.author === this.currentUser) {
+		  if(el.author === this.currentUser || this.currentUser === "admin") {
 			  return el;
 		  }
 	  }

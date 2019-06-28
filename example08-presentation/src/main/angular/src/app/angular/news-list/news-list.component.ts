@@ -25,6 +25,9 @@ export class NewsListComponent {
   @Output()
   changedNews = new EventEmitter<News>();
 
+  @Output()
+  deletedNews = new EventEmitter<News>();
+
 
   get reversedNews(): News[] {
 	return this.news.slice().reverse();
@@ -56,5 +59,9 @@ export class NewsListComponent {
 	  this.openEditDialog(news);	
 	  this.newHeadline="";
 	  this.newContent="";
+  }
+
+  onDelete(news: News): void {
+	  this.deletedNews.emit(news);
   }
 }

@@ -43,7 +43,15 @@ export class SecurityNewsService extends BaseNewsService {
     );
   }
 
+  // placeholder
   change(): Observable<News[]> {
+    return this.http.get<any[]>(`${env.apiUrl}/security/news`, {headers: this.defaultHeaders}).pipe(
+      map(body => body.map(n => News.fromObject(n)))
+    );
+  }
+
+   // placeholder
+  delete(): Observable<News[]> {
     return this.http.get<any[]>(`${env.apiUrl}/security/news`, {headers: this.defaultHeaders}).pipe(
       map(body => body.map(n => News.fromObject(n)))
     );
