@@ -8,15 +8,15 @@
 <form #f="ngForm" (ngSubmit)="register(f)" >
   <div class="form-group">
     <label>Nutzername</label>
-    <input name="username" type="text" class="form-control" [(ngModel)]="username" required>
+    <input name="username" type="text" class="form-control" [(ngModel)]="username" required id="RegisterUsername">
   </div>
   <div class="form-group">
     <label>Passwort</label>
-    <input name="password" type="password" class="form-control" [(ngModel)]="password" required>
+    <input name="password" type="password" class="form-control" [(ngModel)]="password" required id="RegisterPassword1">
   </div>
   <div class="form-group">
 	  <label>Passwort wiederholen</label>
-	  <input name="passwordRepeat" type="password" class="form-control" [(ngModel)]="passwordRepeat" required>
+	  <input name="passwordRepeat" type="password" class="form-control" [(ngModel)]="passwordRepeat" required id="RegisterPassword2">
   </div>
-  <button class="btn btn-block btn-outline-primary">Registrieren</button>
+  <button class="btn btn-block btn-outline-primary" id="RegisterButton">Registrieren</button>
 </form>

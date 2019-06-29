@@ -23,7 +23,7 @@
 	<ngb-tabset>
     
 	  
-	  <ngb-tab title="Meine Nachrichten">
+	  <ngb-tab title="Meine Nachrichten" id="MeineNachrichten">
         <ng-template ngbTabContent>
 		<div class="row justify-content-center">
           <div class="col-8">
@@ -38,7 +38,7 @@
 		</div>	
         </ng-template>
       </ngb-tab>
-      <ngb-tab title="Alle Nachrichten/ Verfassen">
+      <ngb-tab title="Alle Nachrichten/ Verfassen" id="AlleNachrichten">
         <ng-template ngbTabContent>
         
 
@@ -46,9 +46,9 @@
 			<div class="row">
 				<div class="col-12 text-right">
 					<div *ngIf="filtered">
-						<button class="btn btn-light mr-1" (click)="load()">Alle Nachrichten anzeigen</button>
+						<button class="btn btn-light mr-1" (click)="load()" id="UnFilterButton">Alle Nachrichten anzeigen</button>
 					</div>
-					<button class="btn btn-light" (click)="logout()">Logout {{currentUser}}</button>	
+					<button class="btn btn-light" (click)="logout()" id="LogoutButton">Logout {{currentUser}}</button>	
 				</div>
 				
 				

@@ -6,14 +6,14 @@
   <div class="list-group-item list-group-item-action flex-column align-items-start active bg-white text-dark" *ngFor="let n of reversedNews; let i = index" [class.list-group-item-primary]="i == 0">
 	<div *ngIf="!n.editDialog">
 	<div class="d-flex w-100 justify-content-between">
-      <h6 class="mb-0"><button class="btn btn-link" (click)="edit(n)">{{n.headline}}</button> by <button class="btn btn-link" (click)="onFilterByName(n.author)">{{n.author}}</button> <span class="badge badge-primary" *ngIf="i == 0">Latest</span></h6>
+      <h6 class="mb-0"><button class="btn btn-link" (click)="edit(n)" id="NewsListKlapp">{{n.headline}}</button> by <button class="btn btn-link" (click)="onFilterByName(n.author)" id="NewsListFilter">{{n.author}}</button> <span class="badge badge-primary" *ngIf="i == 0">Latest</span></h6>
       <small>{{n.publishedOn | date:mediumDate}}</small>
 	</div>
 	<div *ngIf="n.editable">
 		<p class="ml-3">{{n.content}}</p>
 	</div>
 	<div *ngIf="n.editable && (n.author === user || user === 'admin')">
-		<p class="mb-1"><button class="btn btn-secondary mr-1 ml-2" (click)="openEditDialog(n)">Bearbeiten</button><button class="btn btn-secondary mr-1" (click)="onDelete(n)" >Loeschen</button></p>
+		<p class="mb-1"><button class="btn btn-secondary mr-1 ml-2" (click)="openEditDialog(n)" id="NewsListEdit">Bearbeiten</button><button class="btn btn-secondary mr-1" (click)="onDelete(n)" id="NewsListDelete">Loeschen</button></p>
 	</div>
 	</div>
 
@@ -21,13 +21,13 @@
 		<form #f="ngForm" (ngSubmit)="onSubmit(n)">
       <div class="form-group">
         <label>Headline</label>
-        <input name="headline" class="form-control" type="text" placeholder="{{n.headline}}" required [(ngModel)]="newHeadline">
+        <input name="headline" class="form-control" type="text" placeholder="{{n.headline}}" required [(ngModel)]="newHeadline" id="EditHeadline">
       </div>
       <div class="form-group">
         <label>Content </label>
-        <textarea name="content" class="form-control" placeholder="{{n.content}}" required [(ngModel)]="newContent"></textarea>
+        <textarea name="content" class="form-control" placeholder="{{n.content}}" required [(ngModel)]="newContent" id="EditContent"></textarea>
       </div>
-      <button class="btn btn-block btn-outline-primary">Bestätigen</button>
+      <button class="btn btn-block btn-outline-primary" id="EditButton">Bestätigen</button>
     </form>
 
 	</div>
