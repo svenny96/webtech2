@@ -1,5 +1,6 @@
 package de.ls5.wt2.auth;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -87,11 +88,13 @@ public class NewsCRUD {
     @Produces(MediaType.APPLICATION_JSON)
     public Response readNewsByAuthor(final DBNews param) {
     	 final Subject subject = SecurityUtils.getSubject();
+    	 final String subjectName = String.valueOf(subject.getPrincipal());
+    	 
          if (subject == null || !subject.isAuthenticated()) {
-        	 System.out.println("User: "+SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal());
+        	 
              return Response.status(Response.Status.UNAUTHORIZED).build();
          }
-    	
+         System.out.println("User2: "+String.valueOf(SecurityUtils.getSubject().getPrincipal()));
     	 final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
          final CriteriaQuery<DBNews> query = builder.createQuery(DBNews.class);
 
@@ -118,7 +121,9 @@ public class NewsCRUD {
         query.where(builder.equal(from.get(DBNews_.author), param.getAuthor()));
         query.select(from).orderBy(order);
 
-        return Response.ok(this.entityManager.createQuery(query).setMaxResults(1).getSingleResult()).build();
+        final List<DBNews> results = this.entityManager.createQuery(query).setMaxResults(1).getResultList();
+        if (results.isEmpty()) return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok(results.get(0)).build();
     }
     
     @POST

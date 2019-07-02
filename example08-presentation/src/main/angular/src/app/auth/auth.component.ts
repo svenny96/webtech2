@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthNewsService } from './auth-news.service';
 import { AngularComponent } from '../angular/angular.component';
@@ -15,6 +15,9 @@ import { News } from '../news';
   providers: [AuthNewsService]
 })
 export class AuthComponent extends AngularComponent implements OnInit {
+
+  @Output()
+  public authent = new EventEmitter<void>();	
 
   private authService: AuthService;
 
@@ -34,7 +37,10 @@ export class AuthComponent extends AngularComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe();
     this.news = [];
-    this.latest = null;
+	this.latest = null;
+	this.latestOwned = null;
+	this.newsOwned = [];
+	this.authent.emit();
   }
 
   load(): void {
@@ -68,7 +74,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
 		);
 	}
 	
-    this.filtered = false;
+	this.filtered = false;
   }
 
   loadByAuthor(author: string): void {
@@ -81,6 +87,41 @@ export class AuthComponent extends AngularComponent implements OnInit {
       console.error
 	);
 	this.filtered = true;
+  } 
+
+  loadAfterLogin(): void {
+	  this.newsService.getNewest().subscribe(
+      news => this.latest = news,
+      console.error
+		);
+
+	 this.newsService.getAll().subscribe(
+      news => this.news = news,
+      console.error
+		);
+
+	if(this.currentUser === "admin") {
+		this.newsService.getNewest().subscribe(
+		news => this.latestOwned = news,
+		console.error
+		);
+		this.newsService.getAll().subscribe(
+		news => this.newsOwned = news,
+		console.error
+		);
+	} else {
+		this.newsService.getNewestByAuthor(this.currentUser).subscribe(
+		news => this.latestOwned = news,
+		console.error
+		);
+		this.newsService.getAllByAuthor(this.currentUser).subscribe(
+		news => this.newsOwned = news,
+		console.error
+		);
+	}
+	
+	this.filtered = false;
+	this.authent.emit();
   }
 
   changeNews(newsC: News): void {
