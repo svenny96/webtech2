@@ -125,7 +125,7 @@ export class AuthComponent extends AngularComponent implements OnInit {
   }
 
   changeNews(newsC: News): void {
-	this.newsService.change(newsC.author, newsC.headline, newsC.content).subscribe(
+	this.newsService.change(newsC.id, newsC.headline, newsC.content).subscribe(
 		news =>{ this.news = news;
 		this.newsOwned = this.ownedNewsFromNews;
 		this.latest = this.latestFromNews;
@@ -133,12 +133,10 @@ export class AuthComponent extends AngularComponent implements OnInit {
 		},
 		console.error
 	);
-	
-	this.load();
   }
 
   deleteNews(newsD: News): void {
-	this.newsService.delete(newsD.author, newsD.headline, newsD.content).subscribe(
+	this.newsService.delete(newsD.id).subscribe(
 		news =>{ this.news = news;
 		this.newsOwned = this.ownedNewsFromNews;
 		this.latest = this.latestFromNews;

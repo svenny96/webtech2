@@ -19,31 +19,25 @@ export class AuthNewsService extends BaseNewsService {
   }
 
   getAll(): Observable<News[]> {
-    return this.http.get<any[]>(`${this._authService.getBaseUrl()}/news`, {headers: this._authService.getAuthHeaders()}).pipe(
+    return this.http.get<any[]>(`${env.apiUrl}/news`, {headers: this.defaultHeaders}).pipe(
       map(body => body.map(n => News.fromObject(n)))
     );
   }
 
   getAllByAuthor(author: string): Observable<News[]> {
-    return this.http.post<any[]>(`${this._authService.getBaseUrl()}/news/byAuthor`, {author}, {headers: this._authService.getAuthHeaders()}).pipe(
+    return this.http.post<any[]>(`${env.apiUrl}/news/byAuthor`, { author }, {headers: this.defaultHeaders}).pipe(
       map(body => body.map(n => News.fromObject(n)))
     );
   }
 
   getNewest(): Observable<News> {
-    return this.http.get<any>(`${this._authService.getBaseUrl()}/news/newest`, {headers: this._authService.getAuthHeaders()}).pipe(
+    return this.http.get<any>(`${env.apiUrl}/news/newest`, {headers: this.defaultHeaders}).pipe(
       map(body => News.fromObject(body))
     );
   }
 
   getNewestByAuthor(author: string): Observable<News> {
-	  return this.http.post<any>(`${this._authService.getBaseUrl()}/news/newest/byAuthor`, {author}, {headers: this._authService.getAuthHeaders()}).pipe(
-      map(body => News.fromObject(body))
-    );
-  }
-
-  getNewestBase(): Observable<News> {
-    return this.http.get<any>(`${env.apiUrl}/news/newest`, {headers: this.defaultHeaders}).pipe(
+	 return this.http.post<any>(`${env.apiUrl}/news/newest/byAuthor`, { author }, {headers: this.defaultHeaders}).pipe(
       map(body => News.fromObject(body))
     );
   }
@@ -55,14 +49,14 @@ export class AuthNewsService extends BaseNewsService {
     );
   }
 
-  change(author: string, headline: string, content: string): Observable<News[]> {
-    return this.http.post<any>(`${this._authService.getBaseUrl()}/news/changeNews`, {headline, content, author}, {headers: this._authService.getAuthHeaders()}).pipe(
+  change(id: number, headline: string, content: string): Observable<News[]> {
+    return this.http.post<any>(`${this._authService.getBaseUrl()}/news/changeNews`, {id, headline, content}, {headers: this._authService.getAuthHeaders()}).pipe(
        map(body => body.map(n => News.fromObject(n)))
     );
   }
 
-  delete(author: string, headline: string, content: string): Observable<News[]> {
-    return this.http.post<any>(`${this._authService.getBaseUrl()}/news/deleteNews`, {headline, content, author}, {headers: this._authService.getAuthHeaders()}).pipe(
+  delete(id: number): Observable<News[]> {
+    return this.http.post<any>(`${this._authService.getBaseUrl()}/news/deleteNews`, {id}, {headers: this._authService.getAuthHeaders()}).pipe(
        map(body => body.map(n => News.fromObject(n)))
     );
   }

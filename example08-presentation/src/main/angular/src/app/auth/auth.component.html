@@ -26,6 +26,9 @@
 	  <ngb-tab title="Meine Nachrichten" id="MeineNachrichten">
         <ng-template ngbTabContent>
 		<div class="row justify-content-center">
+		<div class="col-8 text-right">
+				<button class="btn btn-light" (click)="logout()" id="LogoutButton">Logout {{currentUser}}</button>	
+		  </div>
           <div class="col-8">
 				<h4 class="title">Meine Nachrichten</h4>
 				<hr>
@@ -42,13 +45,15 @@
         <ng-template ngbTabContent>
         
 
-			<div *ngIf="isLoggedIn">
+			
 			<div class="row">
 				<div class="col-12 text-right">
+					<div class="btn-group">
 					<div *ngIf="filtered">
 						<button class="btn btn-light mr-1" (click)="load()" id="UnFilterButton">Alle Nachrichten anzeigen</button>
 					</div>
-					<button class="btn btn-light" (click)="logout()" id="LogoutButton">Logout {{currentUser}}</button>	
+					<button class="btn btn-light" (click)="logout()" id="LogoutButton">Logout {{currentUser}}</button>
+					</div>	
 				</div>
 				
 				
@@ -68,10 +73,10 @@
 				<hr>
 				<h4 class="title">All News</h4>
 				<hr>
-				<news-list (filteredName)="loadByAuthor($event)"  [news]="news"></news-list>
+				<news-list [news]="news" (filteredName)="loadByAuthor($event)" (deletedNews)="deleteNews($event)" (changedNews)="changeNews($event)" [user]="currentUser"></news-list>
 				</div>
 			</div>
-			</div>
+			
         </ng-template>
       </ngb-tab>
     </ngb-tabset>

@@ -5,6 +5,7 @@ export class News {
   author: string;
   editable: boolean;
   editDialog: boolean;
+  id: number;
 
   static fromObject(object: any): News {
     const n = new News();
@@ -12,6 +13,7 @@ export class News {
 	n.content = object.content;
 	n.author = object.author;
 	n.publishedOn = new Date(parseInt(object.publishedOn));
+	n.id = object.id;
 	n.editable = false;
 	n.editDialog = false;
     return n;

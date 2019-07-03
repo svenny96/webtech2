@@ -49,11 +49,8 @@ export class NewsListComponent {
 
   onSubmit(news: News): void {
 	 
-	  let nHeadline: string = this.newHeadline;
-	  let nContent: string = this.newContent;
-
-	  news.headline = news.headline+"@"+this.newHeadline;
-	  news.content = news.content+"@"+this.newContent;
+	  news.headline = this.newHeadline;
+	  news.content = this.newContent;
 	  this.changedNews.emit(news);
 	  
 	  this.openEditDialog(news);	

@@ -20,7 +20,7 @@ export abstract class BaseNewsService {
 
   abstract create(headline: string, content: string): Observable<News>;
 
-  abstract change(author: string, headline: string, content: string): Observable<News[]>;
+  abstract change(id: number, headline: string, content: string): Observable<News[]>;
 
-  abstract delete(author: string, headline: string, content: string): Observable<News[]>;
+  abstract delete(id: number): Observable<News[]>;
 }
