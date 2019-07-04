@@ -1,7 +1,7 @@
 package de.ls5.wt2.rest;
 
 import de.ls5.wt2.DBNews;
-
+import de.ls5.wt2.DBUser;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -34,7 +34,18 @@ public class Reset {
         for (DBNews res: result) {
             entityManager.remove(res);
         }
-
+        
+        final CriteriaQuery<DBUser> queryUser = builder.createQuery(DBUser.class);
+        final Root<DBUser> fromUser = queryUser.from(DBUser.class);
+        queryUser.select(fromUser);
+        
+        final List<DBUser> resultUser = this.entityManager.createQuery(queryUser).getResultList();
+        for(DBUser user : resultUser) {
+        	if(!user.getName().equals("admin")) {
+        		entityManager.remove(user);
+        	}
+        }
+                      
         return Response.ok().build();
     }
 }
